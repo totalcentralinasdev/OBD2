@@ -1,0 +1,552 @@
+{
+  "Application": {
+    "Screens": [
+      {
+        "Name": "Screen1",
+        "CanvasBufferSize": 15360,
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "image1",
+            "Width": 1024,
+            "Height": 600,
+            "RelativeFilename": "__generated\\alternate_theme_images_backgrounds_1024x600_gradient_dark.png"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "scalableImage1",
+            "X": 65,
+            "Y": 127,
+            "Width": 915,
+            "Height": 347,
+            "Visible": false,
+            "Filename": "obd2_connector-removebg-preview.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "SvgImage",
+            "Name": "svgImage1",
+            "X": 45,
+            "Y": 113,
+            "Width": 924,
+            "Height": 374,
+            "Image": "OBD-II_type_A_female_connector_pinout.svg",
+            "ImageHorizontalScale": 3.11,
+            "ImageVerticalScale": 3.17
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_14",
+            "X": 595,
+            "Y": 350,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_3_1",
+            "X": 369,
+            "Y": 159,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_5",
+            "X": 519,
+            "Y": 157,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_4",
+            "X": 693,
+            "Y": 157,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_UKOK",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_3",
+            "X": 619,
+            "Y": 157,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_FKWU",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_2",
+            "X": 543,
+            "Y": 157,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_DO61",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_1",
+            "X": 219,
+            "Y": 159,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_9",
+            "X": 219,
+            "Y": 350,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_12",
+            "X": 444,
+            "Y": 350,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_13",
+            "X": 519,
+            "Y": 350,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_11",
+            "X": 369,
+            "Y": 350,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_15",
+            "X": 669,
+            "Y": 350,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_7",
+            "X": 669,
+            "Y": 159,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_4",
+            "X": 444,
+            "Y": 159,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_6",
+            "X": 595,
+            "Y": 157,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "ToggleButton",
+            "Name": "PIN_8",
+            "X": 743,
+            "Y": 159,
+            "Width": 60,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_5",
+            "X": 767,
+            "Y": 157,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_Y744",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 243,
+            "Y": 157,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_6BN4",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1",
+            "X": 320,
+            "Y": 157,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_B3JG",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2",
+            "X": 393,
+            "Y": 157,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_73Y1",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_1",
+            "X": 468,
+            "Y": 157,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_R5CC",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_4_1",
+            "X": 686,
+            "Y": 348,
+            "Width": 26,
+            "Height": 80,
+            "TextId": "__SingleUse_WLGX",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_3_1",
+            "X": 612,
+            "Y": 348,
+            "Width": 26,
+            "Height": 80,
+            "TextId": "__SingleUse_IU4I",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_2_1",
+            "X": 536,
+            "Y": 348,
+            "Width": 26,
+            "Height": 80,
+            "TextId": "__SingleUse_VRF9",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_5_1",
+            "X": 760,
+            "Y": 348,
+            "Width": 26,
+            "Height": 80,
+            "TextId": "__SingleUse_IH6C",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_3",
+            "X": 243,
+            "Y": 348,
+            "Width": 13,
+            "Height": 80,
+            "TextId": "__SingleUse_SOAG",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1_1",
+            "X": 313,
+            "Y": 348,
+            "Width": 26,
+            "Height": 80,
+            "TextId": "__SingleUse_4EM2",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_6",
+            "X": 386,
+            "Y": 348,
+            "Width": 26,
+            "Height": 80,
+            "TextId": "__SingleUse_S4BV",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_2_1_1",
+            "X": 461,
+            "Y": 348,
+            "Width": 26,
+            "Height": 80,
+            "TextId": "__SingleUse_8671",
+            "TextRotation": "0",
+            "AutoSize": true
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "PIN1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN1_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN3",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_3_1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN3_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN8",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_8"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN8_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN9",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_9"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN9_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN11",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_11"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN11_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN12",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_12"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN12_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN13",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_13"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN13_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN4_exe",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_4"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN4_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN5",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_5"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN5_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN6",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_6"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN6_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN7",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_7"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN7_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN14",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_14"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN14_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN15",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_15"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN15_exe"
+            }
+          }
+        ]
+      }
+    ],
+    "CustomContainerDefinitions": [],
+    "Name": "OBD2",
+    "Resolution": {
+      "Width": 1024,
+      "Height": 600
+    },
+    "SelectedColorDepth": 24,
+    "StartupScreenName": "Screen1",
+    "SelectedStartupLanguage": "GB",
+    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "UIPath": ".",
+    "AvailableColorDepths": [
+      24
+    ],
+    "AvailableLCDs": {
+      "24": "LCD24bpp"
+    },
+    "AvailableSections": [
+      "ExtFlashSection",
+      "IntFlashSection"
+    ],
+    "AvailableResolutions": [
+      {
+        "Width": 1024,
+        "Height": 600
+      }
+    ],
+    "PhysicalButtons": [],
+    "FrameworkFeatures": {
+      "LCD24bpp": {
+        "Id": "LCD24bpp",
+        "IsEnabled": true
+      }
+    },
+    "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j8",
+    "PostGenerateCommand": "touchgfx update_project --project-file=simulator/msvs/Application.vcxproj",
+    "PostGenerateTargetCommand": "touchgfx update_project",
+    "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j8",
+    "RunSimulatorCommand": "build\\bin\\simulator.exe",
+    "CompileTargetCommandOverride": "make -f ../../gcc/Makefile clean && make -f ../../gcc/Makefile -j8",
+    "FlashTargetCommandOverride": "make -f ../../gcc/Makefile flash",
+    "LandscapeSkinX": 0,
+    "LandscapeSkinY": 0,
+    "PortraitSkinX": 0,
+    "PortraitSkinY": 0,
+    "DisplayOrientation": "Landscape",
+    "Family": "STM32H7",
+    "SubFamily": "STM32H747/757",
+    "Toolchain": "STM32CubeIDE",
+    "Platform": "m7",
+    "ProjectFile": "../../Riverdi_70STM32H7.ioc",
+    "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
+    "OptionalComponents": [],
+    "AdditionalFeatures": [
+      "CWRVector",
+      "VectorFonts",
+      "Video"
+    ]
+  },
+  "Version": "4.25.0",
+  "CreatedBy": "4.25.0"
+}
