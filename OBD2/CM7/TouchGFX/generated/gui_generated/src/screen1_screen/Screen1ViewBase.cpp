@@ -45,10 +45,10 @@ Screen1ViewBase::Screen1ViewBase() :
     PIN_3_1.setAction(buttonCallback);
     add(PIN_3_1);
 
-    PIN_5.setXY(519, 157);
-    PIN_5.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
-    PIN_5.setAction(buttonCallback);
-    add(PIN_5);
+    PIN_16.setXY(743, 350);
+    PIN_16.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
+    PIN_16.setAction(buttonCallback);
+    add(PIN_16);
 
     textArea1_2_4.setXY(693, 157);
     textArea1_2_4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -102,11 +102,6 @@ Screen1ViewBase::Screen1ViewBase() :
     PIN_7.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
     PIN_7.setAction(buttonCallback);
     add(PIN_7);
-
-    PIN_4.setXY(444, 159);
-    PIN_4.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
-    PIN_4.setAction(buttonCallback);
-    add(PIN_4);
 
     PIN_6.setXY(595, 157);
     PIN_6.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
@@ -258,20 +253,6 @@ void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //Call PIN13_exe
         PIN13_exe();
     }
-    if (&src == &PIN_4)
-    {
-        //PIN4_exe
-        //When PIN_4 clicked call virtual function
-        //Call PIN4_exe
-        PIN4_exe();
-    }
-    if (&src == &PIN_5)
-    {
-        //PIN5
-        //When PIN_5 clicked call virtual function
-        //Call PIN5_exe
-        PIN5_exe();
-    }
     if (&src == &PIN_6)
     {
         //PIN6
@@ -299,5 +280,12 @@ void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //When PIN_15 clicked call virtual function
         //Call PIN15_exe
         PIN15_exe();
+    }
+    if (&src == &PIN_16)
+    {
+        //PIN16
+        //When PIN_16 clicked call virtual function
+        //Call PIN16_exe
+        PIN16_exe();
     }
 }

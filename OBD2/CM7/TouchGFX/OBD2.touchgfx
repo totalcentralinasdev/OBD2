@@ -56,9 +56,9 @@
           },
           {
             "Type": "ToggleButton",
-            "Name": "PIN_5",
-            "X": 519,
-            "Y": 157,
+            "Name": "PIN_16",
+            "X": 743,
+            "Y": 350,
             "Width": 60,
             "Height": 60,
             "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
@@ -161,16 +161,6 @@
             "Type": "ToggleButton",
             "Name": "PIN_7",
             "X": 669,
-            "Y": 159,
-            "Width": 60,
-            "Height": 60,
-            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_action.png",
-            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_tiny_outline_active.png"
-          },
-          {
-            "Type": "ToggleButton",
-            "Name": "PIN_4",
-            "X": 444,
             "Y": 159,
             "Width": 60,
             "Height": 60,
@@ -420,28 +410,6 @@
             }
           },
           {
-            "InteractionName": "PIN4_exe",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "PIN_4"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "PIN4_exe"
-            }
-          },
-          {
-            "InteractionName": "PIN5",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "PIN_5"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "PIN5_exe"
-            }
-          },
-          {
             "InteractionName": "PIN6",
             "Trigger": {
               "Type": "TriggerClicked",
@@ -483,6 +451,17 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "PIN15_exe"
+            }
+          },
+          {
+            "InteractionName": "PIN16",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "PIN_16"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "PIN16_exe"
             }
           }
         ]

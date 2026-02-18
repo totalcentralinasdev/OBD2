@@ -52,14 +52,6 @@ public:
     {
         // Override and implement this function in Screen1
     }
-    virtual void PIN4_exe()
-    {
-        // Override and implement this function in Screen1
-    }
-    virtual void PIN5_exe()
-    {
-        // Override and implement this function in Screen1
-    }
     virtual void PIN6_exe()
     {
         // Override and implement this function in Screen1
@@ -73,6 +65,10 @@ public:
         // Override and implement this function in Screen1
     }
     virtual void PIN15_exe()
+    {
+        // Override and implement this function in Screen1
+    }
+    virtual void PIN16_exe()
     {
         // Override and implement this function in Screen1
     }
@@ -91,7 +87,7 @@ protected:
     touchgfx::SVGImage svgImage1;
     touchgfx::ToggleButton PIN_14;
     touchgfx::ToggleButton PIN_3_1;
-    touchgfx::ToggleButton PIN_5;
+    touchgfx::ToggleButton PIN_16;
     touchgfx::TextArea textArea1_2_4;
     touchgfx::TextArea textArea1_2_3;
     touchgfx::TextArea textArea1_2_2;
@@ -102,7 +98,6 @@ protected:
     touchgfx::ToggleButton PIN_11;
     touchgfx::ToggleButton PIN_15;
     touchgfx::ToggleButton PIN_7;
-    touchgfx::ToggleButton PIN_4;
     touchgfx::ToggleButton PIN_6;
     touchgfx::ToggleButton PIN_8;
     touchgfx::TextArea textArea1_2_5;

@@ -27,6 +27,7 @@
 #include "fatfs.h"
 #include "fdcan.h"
 #include "i2c.h"
+#include "iwdg.h"
 #include "jpeg.h"
 #include "lptim.h"
 #include "ltdc.h"
@@ -73,8 +74,6 @@
 /* USER CODE BEGIN PV */
 QueueHandle_t pin1;
 QueueHandle_t pin3;
-QueueHandle_t pin4;
-QueueHandle_t pin5;
 QueueHandle_t pin6;
 QueueHandle_t pin7;
 QueueHandle_t pin8;
@@ -84,6 +83,7 @@ QueueHandle_t pin12;
 QueueHandle_t pin13;
 QueueHandle_t pin14;
 QueueHandle_t pin15;
+QueueHandle_t pin16;
 
 /* USER CODE END PV */
 
@@ -146,8 +146,6 @@ int main(void)
 
   pin1 = xQueueCreate(1,sizeof(uint8_t));
   pin3 = xQueueCreate(1,sizeof(uint8_t));
-  pin4 = xQueueCreate(1,sizeof(uint8_t));
-  pin5 = xQueueCreate(1,sizeof(uint8_t));
   pin6 = xQueueCreate(1,sizeof(uint8_t));
   pin7 = xQueueCreate(1,sizeof(uint8_t));
   pin8 = xQueueCreate(1,sizeof(uint8_t));
@@ -157,6 +155,7 @@ int main(void)
   pin13 = xQueueCreate(1,sizeof(uint8_t));
   pin14 = xQueueCreate(1,sizeof(uint8_t));
   pin15 = xQueueCreate(1,sizeof(uint8_t));
+  pin16 = xQueueCreate(1,sizeof(uint8_t));
 
 
   /* USER CODE END SysInit */
@@ -190,6 +189,7 @@ int main(void)
   MX_ADC3_Init();
   MX_FATFS_Init();
   MX_I2C1_Init();
+  //MX_IWDG1_Init();
   MX_TouchGFX_Init();
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
@@ -208,6 +208,8 @@ int main(void)
       Error_Handler();
     }
 
+ // MX_IWDG1_Init(); // quando gera codigo comentar init de cima
+ // HAL_IWDG_Refresh(&hiwdg1);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -259,10 +261,11 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48|RCC_OSCILLATORTYPE_HSE
-                              |RCC_OSCILLATORTYPE_LSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48|RCC_OSCILLATORTYPE_LSI
+                              |RCC_OSCILLATORTYPE_HSE|RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
