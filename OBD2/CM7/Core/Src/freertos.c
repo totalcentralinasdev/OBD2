@@ -30,7 +30,7 @@
 #include "TCA9535.h"
 #include "FreeRTOS.h"
 #include "queue.h"
-#include "iwdg.h"
+//#include "iwdg.h"
 #include "spi.h"
 
 extern FDCAN_TxHeaderTypeDef TxHeader;
@@ -62,7 +62,7 @@ uint8_t RxData[16];
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
-  .stack_size = 1024 * 4,
+  .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for VideoTask */
@@ -266,11 +266,21 @@ void StartDefaultTask(void *argument)
 			TCA9535_WritePin(&hi2c4, TCA9535_PORT1, 7, pin16_state);
 		}
 
-		uint16_t SPI_RX = 20;
-		//HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
-		//HAL_SPI_Receive(&hspi2, &SPI_RX, 1, 200);
-		//HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
-		int st = uxTaskGetStackHighWaterMark(NULL);
+		uint16_t SPI_RX;
+		uint8_t dummy = 0x80;
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+		//vTaskDelay(pdMS_TO_TICKS(10));
+		HAL_SPI_Receive(&hspi2, &SPI_RX, 1, 200);
+		//HAL_SPI_TransmitReceive(&hspi2, &dummy, &SPI_RX, 1, 100);
+		//vTaskDelay(pdMS_TO_TICKS(5));
+		while(HAL_SPI_GetState(&hspi2) == HAL_BUSY);
+
+
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+		uint16_t current_raw = (SPI_RX >> 3) & 0x1FFF;
+		int16_t signed_value = current_raw - 4096;
+
+
 		vTaskDelay(pdMS_TO_TICKS(100));
 
 	}

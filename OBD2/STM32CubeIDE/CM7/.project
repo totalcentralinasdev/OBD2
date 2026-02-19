@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>Riverdi_70STM32H7_CM7</name>
-	<comment/>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -160,11 +160,6 @@
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_i2c_ex.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_iwdg.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_iwdg.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_jpeg.c</name>
@@ -490,11 +485,6 @@
 			<name>Application/User/Core/i2c.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/CM7/Core/Src/i2c.c</locationURI>
-		</link>
-		<link>
-			<name>Application/User/Core/iwdg.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/CM7/Core/Src/iwdg.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/Core/jpeg.c</name>

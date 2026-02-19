@@ -65,9 +65,6 @@
           <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
         </file>
         <file>
-          <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_iwdg.c</name>
-        </file>
-        <file>
           <name>Drivers\CMSIS\Device\ST\STM32H7xx\Source\Templates\system_stm32h7xx.c</name>
         </file>
         <file>
@@ -263,9 +260,6 @@
             <file>
               <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_exti.c</name>
             </file>
-            <file>
-              <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_iwdg.c</name>
-            </file>
           </group>
           <group>
             <name>CMSIS</name>
@@ -284,9 +278,6 @@
                 <name>Core</name>
                 <file>
                   <name>CM4/Core/Src/main.c</name>
-                </file>
-                <file>
-                  <name>CM4/Core/Src/iwdg.c</name>
                 </file>
                 <file>
                   <name>CM4/Core/Src/stm32h7xx_it.c</name>
@@ -416,9 +407,6 @@
         </file>
         <file>
           <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sdram.c</name>
-        </file>
-        <file>
-          <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_iwdg.c</name>
         </file>
         <file>
           <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_jpeg.c</name>
@@ -756,9 +744,6 @@
               <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_sdram.c</name>
             </file>
             <file>
-              <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_iwdg.c</name>
-            </file>
-            <file>
               <name>Drivers\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_jpeg.c</name>
             </file>
             <file>
@@ -1034,9 +1019,6 @@
                 </file>
                 <file>
                   <name>CM7/Core/Src/i2c.c</name>
-                </file>
-                <file>
-                  <name>CM7/Core/Src/iwdg.c</name>
                 </file>
                 <file>
                   <name>CM7/Core/Src/jpeg.c</name>
