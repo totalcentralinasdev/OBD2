@@ -13,8 +13,6 @@ public:
     virtual void tearDownScreen();
     virtual void PIN1_exe();
     virtual void PIN3_exe();
-    virtual void PIN4_exe();
-    virtual void PIN5_exe();
     virtual void PIN6_exe();
     virtual void PIN7_exe();
     virtual void PIN8_exe();
@@ -24,6 +22,8 @@ public:
 	virtual void PIN13_exe();
 	virtual void PIN14_exe();
 	virtual void PIN15_exe();
+	virtual void PIN16_exe();
+	virtual void update_values_exe();
 protected:
 };
 

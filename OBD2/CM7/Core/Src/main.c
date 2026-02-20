@@ -73,8 +73,6 @@
 /* USER CODE BEGIN PV */
 QueueHandle_t pin1;
 QueueHandle_t pin3;
-QueueHandle_t pin4;
-QueueHandle_t pin5;
 QueueHandle_t pin6;
 QueueHandle_t pin7;
 QueueHandle_t pin8;
@@ -84,6 +82,17 @@ QueueHandle_t pin12;
 QueueHandle_t pin13;
 QueueHandle_t pin14;
 QueueHandle_t pin15;
+QueueHandle_t pin16;
+
+QueueHandle_t Sensor_Queue;
+
+
+struct sensor{
+    float voltage;
+    float current;
+};
+
+struct sensor dummy_sensor;
 
 /* USER CODE END PV */
 
@@ -146,8 +155,6 @@ int main(void)
 
   pin1 = xQueueCreate(1,sizeof(uint8_t));
   pin3 = xQueueCreate(1,sizeof(uint8_t));
-  pin4 = xQueueCreate(1,sizeof(uint8_t));
-  pin5 = xQueueCreate(1,sizeof(uint8_t));
   pin6 = xQueueCreate(1,sizeof(uint8_t));
   pin7 = xQueueCreate(1,sizeof(uint8_t));
   pin8 = xQueueCreate(1,sizeof(uint8_t));
@@ -157,6 +164,8 @@ int main(void)
   pin13 = xQueueCreate(1,sizeof(uint8_t));
   pin14 = xQueueCreate(1,sizeof(uint8_t));
   pin15 = xQueueCreate(1,sizeof(uint8_t));
+  pin16 = xQueueCreate(1,sizeof(uint8_t));
+  Sensor_Queue = xQueueCreate(1,sizeof(dummy_sensor));
 
 
   /* USER CODE END SysInit */
@@ -174,7 +183,6 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM1_Init();
   MX_TIM5_Init();
-  MX_UART4_Init();
   MX_UART8_Init();
   MX_CRC_Init();
   MX_I2C2_Init();
@@ -208,6 +216,8 @@ int main(void)
       Error_Handler();
     }
 
+ // MX_IWDG1_Init(); // quando gera codigo comentar init de cima
+ // HAL_IWDG_Refresh(&hiwdg1);
   /* USER CODE END 2 */
 
   /* Init scheduler */

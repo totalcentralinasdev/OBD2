@@ -13,6 +13,8 @@
 #include <touchgfx/widgets/SVGImage.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/widgets/BoxWithBorder.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
 {
@@ -20,6 +22,7 @@ public:
     Screen1ViewBase();
     virtual ~Screen1ViewBase();
     virtual void setupScreen();
+    virtual void handleTickEvent();
 
     /*
      * Virtual Action Handlers
@@ -52,14 +55,6 @@ public:
     {
         // Override and implement this function in Screen1
     }
-    virtual void PIN4_exe()
-    {
-        // Override and implement this function in Screen1
-    }
-    virtual void PIN5_exe()
-    {
-        // Override and implement this function in Screen1
-    }
     virtual void PIN6_exe()
     {
         // Override and implement this function in Screen1
@@ -73,6 +68,14 @@ public:
         // Override and implement this function in Screen1
     }
     virtual void PIN15_exe()
+    {
+        // Override and implement this function in Screen1
+    }
+    virtual void PIN16_exe()
+    {
+        // Override and implement this function in Screen1
+    }
+    virtual void update_values_exe()
     {
         // Override and implement this function in Screen1
     }
@@ -91,7 +94,7 @@ protected:
     touchgfx::SVGImage svgImage1;
     touchgfx::ToggleButton PIN_14;
     touchgfx::ToggleButton PIN_3_1;
-    touchgfx::ToggleButton PIN_5;
+    touchgfx::ToggleButton PIN_16;
     touchgfx::TextArea textArea1_2_4;
     touchgfx::TextArea textArea1_2_3;
     touchgfx::TextArea textArea1_2_2;
@@ -102,7 +105,6 @@ protected:
     touchgfx::ToggleButton PIN_11;
     touchgfx::ToggleButton PIN_15;
     touchgfx::ToggleButton PIN_7;
-    touchgfx::ToggleButton PIN_4;
     touchgfx::ToggleButton PIN_6;
     touchgfx::ToggleButton PIN_8;
     touchgfx::TextArea textArea1_2_5;
@@ -118,6 +120,17 @@ protected:
     touchgfx::TextArea textArea1_1_1;
     touchgfx::TextArea textArea1_2_6;
     touchgfx::TextArea textArea1_2_1_1;
+    touchgfx::BoxWithBorder boxWithBorder1;
+    touchgfx::TextAreaWithOneWildcard Voltage_text;
+    touchgfx::TextAreaWithOneWildcard Current_text;
+
+    /*
+     * Wildcard Buffers
+     */
+    static const uint16_t VOLTAGE_TEXT_SIZE = 100;
+    touchgfx::Unicode::UnicodeChar Voltage_textBuffer[VOLTAGE_TEXT_SIZE];
+    static const uint16_t CURRENT_TEXT_SIZE = 100;
+    touchgfx::Unicode::UnicodeChar Current_textBuffer[CURRENT_TEXT_SIZE];
 
 private:
 
@@ -136,6 +149,12 @@ private:
      * Callback Handler Declarations
      */
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
+
+    /*
+     * Tick Counter Declarations
+     */
+    static const uint32_t TICK_UPDATE_VALUES_INTERVAL = 4;
+    uint32_t frameCountUpdate_valuesInterval;
 
 };
 

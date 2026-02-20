@@ -66,7 +66,30 @@ extern SD_HandleTypeDef hsd1;
 extern TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN EV */
+void hard_fault_c_handler(uint32_t *stacked_regs)
+{
+    uint32_t r0  = stacked_regs[0];
+    uint32_t r1  = stacked_regs[1];
+    uint32_t r2  = stacked_regs[2];
+    uint32_t r3  = stacked_regs[3];
+    uint32_t r12 = stacked_regs[4];
+    uint32_t lr  = stacked_regs[5];
+    uint32_t pc  = stacked_regs[6]; // the instruction that caused the fault
+    uint32_t xpsr= stacked_regs[7];
 
+    // Store these in global variables for inspection in debugger
+    volatile uint32_t hf_r0  = r0;
+    volatile uint32_t hf_r1  = r1;
+    volatile uint32_t hf_r2  = r2;
+    volatile uint32_t hf_r3  = r3;
+    volatile uint32_t hf_r12 = r12;
+    volatile uint32_t hf_lr  = lr;
+    volatile uint32_t hf_pc  = pc;
+    volatile uint32_t hf_xpsr= xpsr;
+
+    // Stop here for debugger
+    while(1);
+}
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -93,11 +116,20 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
-
+	 __asm volatile
+	    (
+	        "TST lr, #4           \n" // check which stack pointer was used
+	        "ITE EQ                \n"
+	        "MRSEQ r0, MSP         \n" // main stack pointer
+	        "MRSNE r0, PSP         \n" // process stack pointer
+	        "B hard_fault_c_handler \n"
+	    );
+	__asm volatile("BKPT #0");
   /* USER CODE END HardFault_IRQn 0 */
   while (1)
   {
     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
+	  __asm volatile("BKPT #0");
     /* USER CODE END W1_HardFault_IRQn 0 */
   }
 }

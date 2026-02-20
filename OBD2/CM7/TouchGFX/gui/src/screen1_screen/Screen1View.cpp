@@ -5,8 +5,6 @@
 
 extern QueueHandle_t pin1;
 extern QueueHandle_t pin3;
-extern QueueHandle_t pin4;
-extern QueueHandle_t pin5;
 extern QueueHandle_t pin6;
 extern QueueHandle_t pin7;
 extern QueueHandle_t pin8;
@@ -16,6 +14,7 @@ extern QueueHandle_t pin12;
 extern QueueHandle_t pin13;
 extern QueueHandle_t pin14;
 extern QueueHandle_t pin15;
+extern QueueHandle_t pin16;
 
 
 
@@ -53,23 +52,6 @@ void Screen1View::PIN3_exe(){
 	}
 }
 
-void Screen1View::PIN4_exe(){
-	uint8_t pin4_state;
-	if(xQueuePeek(pin4, &pin4_state, 0) == pdPASS){
-		pin4_state ^= 1;
-		pin4_state = pin4_state & 1;
-		xQueueOverwrite(pin4,&pin4_state);
-	}
-}
-
-void Screen1View::PIN5_exe(){
-	uint8_t pin5_state;
-	if(xQueuePeek(pin5, &pin5_state, 0) == pdPASS){
-		pin5_state ^= 1;
-		pin5_state = pin5_state & 1;
-		xQueueOverwrite(pin5,&pin5_state);
-	}
-}
 
 void Screen1View::PIN6_exe(){
 	uint8_t pin6_state;
@@ -150,5 +132,36 @@ void Screen1View::PIN15_exe(){
 		pin15_state ^= 1;
 		pin15_state = pin15_state & 1;
 		xQueueOverwrite(pin15,&pin15_state);
+	}
+}
+
+
+void Screen1View::PIN16_exe(){
+	uint8_t pin16_state;
+	if(xQueuePeek(pin16, &pin16_state, 0) == pdPASS){
+		pin16_state ^= 1;
+		pin16_state = pin16_state & 1;
+		xQueueOverwrite(pin16,&pin16_state);
+	}
+}
+
+
+
+void Screen1View::update_values_exe(){
+	extern QueueHandle_t Sensor_Queue;
+
+	struct sensor{
+	    float voltage;
+	    float current;
+	};
+
+	struct sensor SensorValues;
+
+	if(xQueueReceive(Sensor_Queue, &SensorValues, pdMS_TO_TICKS(10)) == pdPASS){
+		SensorValues.voltage = 10.856;
+		Unicode::snprintfFloat(Voltage_textBuffer, VOLTAGE_TEXT_SIZE, "%.2f V",SensorValues.voltage);
+		Unicode::snprintfFloat(Current_textBuffer, CURRENT_TEXT_SIZE, "%.2f A",SensorValues.current);
+		Voltage_text.invalidate();
+		Current_text.invalidate();
 	}
 }

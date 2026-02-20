@@ -9,7 +9,8 @@
 #include <texts/TextKeysAndLanguages.hpp>
 
 Screen1ViewBase::Screen1ViewBase() :
-    buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler)
+    buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler),
+    frameCountUpdate_valuesInterval(0)
 {
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
 
@@ -45,10 +46,10 @@ Screen1ViewBase::Screen1ViewBase() :
     PIN_3_1.setAction(buttonCallback);
     add(PIN_3_1);
 
-    PIN_5.setXY(519, 157);
-    PIN_5.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
-    PIN_5.setAction(buttonCallback);
-    add(PIN_5);
+    PIN_16.setXY(743, 350);
+    PIN_16.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
+    PIN_16.setAction(buttonCallback);
+    add(PIN_16);
 
     textArea1_2_4.setXY(693, 157);
     textArea1_2_4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -102,11 +103,6 @@ Screen1ViewBase::Screen1ViewBase() :
     PIN_7.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
     PIN_7.setAction(buttonCallback);
     add(PIN_7);
-
-    PIN_4.setXY(444, 159);
-    PIN_4.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
-    PIN_4.setAction(buttonCallback);
-    add(PIN_4);
 
     PIN_6.setXY(595, 157);
     PIN_6.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTIVE_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_ICON_ROUNDED_TINY_OUTLINE_ACTION_ID));
@@ -195,6 +191,30 @@ Screen1ViewBase::Screen1ViewBase() :
     textArea1_2_1_1.setLinespacing(0);
     textArea1_2_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_8671));
     add(textArea1_2_1_1);
+
+    boxWithBorder1.setPosition(815, 487, 198, 84);
+    boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    boxWithBorder1.setBorderSize(5);
+    add(boxWithBorder1);
+
+    Voltage_text.setXY(830, 496);
+    Voltage_text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    Voltage_text.setLinespacing(0);
+    Unicode::snprintf(Voltage_textBuffer, VOLTAGE_TEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_0GIO).getText());
+    Voltage_text.setWildcard(Voltage_textBuffer);
+    Voltage_text.resizeToCurrentText();
+    Voltage_text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XSKD));
+    add(Voltage_text);
+
+    Current_text.setXY(830, 537);
+    Current_text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    Current_text.setLinespacing(0);
+    Unicode::snprintf(Current_textBuffer, CURRENT_TEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XJH1).getText());
+    Current_text.setWildcard(Current_textBuffer);
+    Current_text.resizeToCurrentText();
+    Current_text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3J2B));
+    add(Current_text);
 }
 
 Screen1ViewBase::~Screen1ViewBase()
@@ -258,20 +278,6 @@ void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //Call PIN13_exe
         PIN13_exe();
     }
-    if (&src == &PIN_4)
-    {
-        //PIN4_exe
-        //When PIN_4 clicked call virtual function
-        //Call PIN4_exe
-        PIN4_exe();
-    }
-    if (&src == &PIN_5)
-    {
-        //PIN5
-        //When PIN_5 clicked call virtual function
-        //Call PIN5_exe
-        PIN5_exe();
-    }
     if (&src == &PIN_6)
     {
         //PIN6
@@ -299,5 +305,25 @@ void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //When PIN_15 clicked call virtual function
         //Call PIN15_exe
         PIN15_exe();
+    }
+    if (&src == &PIN_16)
+    {
+        //PIN16
+        //When PIN_16 clicked call virtual function
+        //Call PIN16_exe
+        PIN16_exe();
+    }
+}
+
+void Screen1ViewBase::handleTickEvent()
+{
+    frameCountUpdate_valuesInterval++;
+    if(frameCountUpdate_valuesInterval == TICK_UPDATE_VALUES_INTERVAL)
+    {
+        //update_values
+        //When every N tick call virtual function
+        //Call update_values_exe
+        update_values_exe();
+        frameCountUpdate_valuesInterval = 0;
     }
 }
