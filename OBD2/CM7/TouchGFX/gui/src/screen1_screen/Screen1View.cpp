@@ -144,3 +144,24 @@ void Screen1View::PIN16_exe(){
 		xQueueOverwrite(pin16,&pin16_state);
 	}
 }
+
+
+
+void Screen1View::update_values_exe(){
+	extern QueueHandle_t Sensor_Queue;
+
+	struct sensor{
+	    float voltage;
+	    float current;
+	};
+
+	struct sensor SensorValues;
+
+	if(xQueueReceive(Sensor_Queue, &SensorValues, pdMS_TO_TICKS(10)) == pdPASS){
+		SensorValues.voltage = 10.856;
+		Unicode::snprintfFloat(Voltage_textBuffer, VOLTAGE_TEXT_SIZE, "%.2f V",SensorValues.voltage);
+		Unicode::snprintfFloat(Current_textBuffer, CURRENT_TEXT_SIZE, "%.2f A",SensorValues.current);
+		Voltage_text.invalidate();
+		Current_text.invalidate();
+	}
+}

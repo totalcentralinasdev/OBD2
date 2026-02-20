@@ -70,7 +70,7 @@
             "X": 693,
             "Y": 157,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_UKOK",
             "TextRotation": "0",
             "AutoSize": true
@@ -81,7 +81,7 @@
             "X": 619,
             "Y": 157,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_FKWU",
             "TextRotation": "0",
             "AutoSize": true
@@ -92,7 +92,7 @@
             "X": 543,
             "Y": 157,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_DO61",
             "TextRotation": "0",
             "AutoSize": true
@@ -193,7 +193,7 @@
             "X": 767,
             "Y": 157,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_Y744",
             "TextRotation": "0",
             "AutoSize": true
@@ -204,7 +204,7 @@
             "X": 243,
             "Y": 157,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_6BN4",
             "TextRotation": "0",
             "AutoSize": true
@@ -215,7 +215,7 @@
             "X": 320,
             "Y": 157,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_B3JG",
             "TextRotation": "0",
             "AutoSize": true
@@ -226,7 +226,7 @@
             "X": 393,
             "Y": 157,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_73Y1",
             "TextRotation": "0",
             "AutoSize": true
@@ -237,7 +237,7 @@
             "X": 468,
             "Y": 157,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_R5CC",
             "TextRotation": "0",
             "AutoSize": true
@@ -248,7 +248,7 @@
             "X": 686,
             "Y": 348,
             "Width": 26,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_WLGX",
             "TextRotation": "0",
             "AutoSize": true
@@ -259,7 +259,7 @@
             "X": 612,
             "Y": 348,
             "Width": 26,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_IU4I",
             "TextRotation": "0",
             "AutoSize": true
@@ -270,7 +270,7 @@
             "X": 536,
             "Y": 348,
             "Width": 26,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_VRF9",
             "TextRotation": "0",
             "AutoSize": true
@@ -281,7 +281,7 @@
             "X": 760,
             "Y": 348,
             "Width": 26,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_IH6C",
             "TextRotation": "0",
             "AutoSize": true
@@ -292,7 +292,7 @@
             "X": 243,
             "Y": 348,
             "Width": 13,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_SOAG",
             "TextRotation": "0",
             "AutoSize": true
@@ -303,7 +303,7 @@
             "X": 313,
             "Y": 348,
             "Width": 26,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_4EM2",
             "TextRotation": "0",
             "AutoSize": true
@@ -314,7 +314,7 @@
             "X": 386,
             "Y": 348,
             "Width": 26,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_S4BV",
             "TextRotation": "0",
             "AutoSize": true
@@ -325,10 +325,56 @@
             "X": 461,
             "Y": 348,
             "Width": 26,
-            "Height": 80,
+            "Height": 96,
             "TextId": "__SingleUse_8671",
             "TextRotation": "0",
             "AutoSize": true
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 815,
+            "Y": 487,
+            "Width": 198,
+            "Height": 84,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 5
+          },
+          {
+            "Type": "TextArea",
+            "Name": "Voltage_text",
+            "X": 830,
+            "Y": 496,
+            "Width": 180,
+            "Height": 24,
+            "TextId": "__SingleUse_XSKD",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_0GIO",
+              "UseBuffer": true,
+              "BufferSize": 100
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "Current_text",
+            "X": 830,
+            "Y": 537,
+            "Width": 205,
+            "Height": 24,
+            "TextId": "__SingleUse_3J2B",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_XJH1",
+              "UseBuffer": true,
+              "BufferSize": 100
+            }
           }
         ],
         "Interactions": [
@@ -462,6 +508,17 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "PIN16_exe"
+            }
+          },
+          {
+            "InteractionName": "update_values",
+            "Trigger": {
+              "Type": "TriggerOnEveryTick",
+              "TickCount": 4
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "update_values_exe"
             }
           }
         ]

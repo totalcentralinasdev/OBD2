@@ -84,6 +84,16 @@ QueueHandle_t pin14;
 QueueHandle_t pin15;
 QueueHandle_t pin16;
 
+QueueHandle_t Sensor_Queue;
+
+
+struct sensor{
+    float voltage;
+    float current;
+};
+
+struct sensor dummy_sensor;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -155,6 +165,7 @@ int main(void)
   pin14 = xQueueCreate(1,sizeof(uint8_t));
   pin15 = xQueueCreate(1,sizeof(uint8_t));
   pin16 = xQueueCreate(1,sizeof(uint8_t));
+  Sensor_Queue = xQueueCreate(1,sizeof(dummy_sensor));
 
 
   /* USER CODE END SysInit */
@@ -172,7 +183,6 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM1_Init();
   MX_TIM5_Init();
-  MX_UART4_Init();
   MX_UART8_Init();
   MX_CRC_Init();
   MX_I2C2_Init();

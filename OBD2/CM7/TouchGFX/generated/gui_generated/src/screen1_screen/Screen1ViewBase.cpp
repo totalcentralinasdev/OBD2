@@ -9,7 +9,8 @@
 #include <texts/TextKeysAndLanguages.hpp>
 
 Screen1ViewBase::Screen1ViewBase() :
-    buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler)
+    buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler),
+    frameCountUpdate_valuesInterval(0)
 {
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
 
@@ -190,6 +191,30 @@ Screen1ViewBase::Screen1ViewBase() :
     textArea1_2_1_1.setLinespacing(0);
     textArea1_2_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_8671));
     add(textArea1_2_1_1);
+
+    boxWithBorder1.setPosition(815, 487, 198, 84);
+    boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    boxWithBorder1.setBorderSize(5);
+    add(boxWithBorder1);
+
+    Voltage_text.setXY(830, 496);
+    Voltage_text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    Voltage_text.setLinespacing(0);
+    Unicode::snprintf(Voltage_textBuffer, VOLTAGE_TEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_0GIO).getText());
+    Voltage_text.setWildcard(Voltage_textBuffer);
+    Voltage_text.resizeToCurrentText();
+    Voltage_text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XSKD));
+    add(Voltage_text);
+
+    Current_text.setXY(830, 537);
+    Current_text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    Current_text.setLinespacing(0);
+    Unicode::snprintf(Current_textBuffer, CURRENT_TEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XJH1).getText());
+    Current_text.setWildcard(Current_textBuffer);
+    Current_text.resizeToCurrentText();
+    Current_text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3J2B));
+    add(Current_text);
 }
 
 Screen1ViewBase::~Screen1ViewBase()
@@ -287,5 +312,18 @@ void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //When PIN_16 clicked call virtual function
         //Call PIN16_exe
         PIN16_exe();
+    }
+}
+
+void Screen1ViewBase::handleTickEvent()
+{
+    frameCountUpdate_valuesInterval++;
+    if(frameCountUpdate_valuesInterval == TICK_UPDATE_VALUES_INTERVAL)
+    {
+        //update_values
+        //When every N tick call virtual function
+        //Call update_values_exe
+        update_values_exe();
+        frameCountUpdate_valuesInterval = 0;
     }
 }

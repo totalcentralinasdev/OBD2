@@ -86,8 +86,6 @@ void Error_Handler(void);
 #define RS232_RTS_GPIO_Port GPIOD
 #define SDMMC1_D2_Pin GPIO_PIN_10
 #define SDMMC1_D2_GPIO_Port GPIOC
-#define RS485_DE_Pin GPIO_PIN_15
-#define RS485_DE_GPIO_Port GPIOA
 #define D25_Pin GPIO_PIN_1
 #define D25_GPIO_Port GPIOI
 #define D24_Pin GPIO_PIN_0
@@ -136,8 +134,6 @@ void Error_Handler(void);
 #define SDIO_CD_GPIO_Port GPIOE
 #define FDCAN1_TX_Pin GPIO_PIN_9
 #define FDCAN1_TX_GPIO_Port GPIOB
-#define RS485_RX_Pin GPIO_PIN_8
-#define RS485_RX_GPIO_Port GPIOB
 #define SDNCAS_Pin GPIO_PIN_15
 #define SDNCAS_GPIO_Port GPIOG
 #define RMII_TXD0_Pin GPIO_PIN_13
@@ -211,8 +207,6 @@ void Error_Handler(void);
 #define RMII_MDIO_GPIO_Port GPIOA
 #define RMII_REF_CLK_Pin GPIO_PIN_1
 #define RMII_REF_CLK_GPIO_Port GPIOA
-#define RS485_TX_Pin GPIO_PIN_0
-#define RS485_TX_GPIO_Port GPIOA
 #define D7_Pin GPIO_PIN_10
 #define D7_GPIO_Port GPIOE
 #define SDNWE_Pin GPIO_PIN_5

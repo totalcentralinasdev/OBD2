@@ -60,25 +60,20 @@ uint8_t RxData[16];
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
-const osThreadAttr_t defaultTask_attributes = {
-  .name = "defaultTask",
-  .stack_size = 512 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
+const osThreadAttr_t defaultTask_attributes = { .name = "defaultTask",
+		.stack_size = 512 * 4, .priority = (osPriority_t) osPriorityNormal, };
 /* Definitions for VideoTask */
 osThreadId_t VideoTaskHandle;
-const osThreadAttr_t VideoTask_attributes = {
-  .name = "VideoTask",
-  .stack_size = 4096 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
+const osThreadAttr_t VideoTask_attributes = { .name = "VideoTask", .stack_size =
+		4096 * 4, .priority = (osPriority_t) osPriorityLow, };
 /* Definitions for TouchGFXTask */
 osThreadId_t TouchGFXTaskHandle;
-const osThreadAttr_t TouchGFXTask_attributes = {
-  .name = "TouchGFXTask",
-  .stack_size = 8192 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
+const osThreadAttr_t TouchGFXTask_attributes = { .name = "TouchGFXTask",
+		.stack_size = 8192 * 4, .priority = (osPriority_t) osPriorityLow, };
+/* Definitions for Aquisition_task */
+osThreadId_t Aquisition_taskHandle;
+const osThreadAttr_t Aquisition_task_attributes = { .name = "Aquisition_task",
+		.stack_size = 1024 * 4, .priority = (osPriority_t) osPriorityLow, };
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -88,6 +83,7 @@ const osThreadAttr_t TouchGFXTask_attributes = {
 void StartDefaultTask(void *argument);
 extern void videoTaskFunc(void *argument);
 extern void TouchGFX_Task(void *argument);
+void StartAquisition(void *argument);
 
 extern void MX_USB_HOST_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -119,48 +115,54 @@ void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName) {
 /* USER CODE END 4 */
 
 /**
-  * @brief  FreeRTOS initialization
-  * @param  None
-  * @retval None
-  */
+ * @brief  FreeRTOS initialization
+ * @param  None
+ * @retval None
+ */
 void MX_FREERTOS_Init(void) {
-  /* USER CODE BEGIN Init */
+	/* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+	/* USER CODE END Init */
 
-  /* USER CODE BEGIN RTOS_MUTEX */
+	/* USER CODE BEGIN RTOS_MUTEX */
 	/* add mutexes, ... */
-  /* USER CODE END RTOS_MUTEX */
+	/* USER CODE END RTOS_MUTEX */
 
-  /* USER CODE BEGIN RTOS_SEMAPHORES */
+	/* USER CODE BEGIN RTOS_SEMAPHORES */
 	/* add semaphores, ... */
-  /* USER CODE END RTOS_SEMAPHORES */
+	/* USER CODE END RTOS_SEMAPHORES */
 
-  /* USER CODE BEGIN RTOS_TIMERS */
+	/* USER CODE BEGIN RTOS_TIMERS */
 	/* start timers, add new ones, ... */
-  /* USER CODE END RTOS_TIMERS */
+	/* USER CODE END RTOS_TIMERS */
 
-  /* USER CODE BEGIN RTOS_QUEUES */
+	/* USER CODE BEGIN RTOS_QUEUES */
 	/* add queues, ... */
-  /* USER CODE END RTOS_QUEUES */
+	/* USER CODE END RTOS_QUEUES */
 
-  /* Create the thread(s) */
-  /* creation of defaultTask */
-  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+	/* Create the thread(s) */
+	/* creation of defaultTask */
+	defaultTaskHandle = osThreadNew(StartDefaultTask, NULL,
+			&defaultTask_attributes);
 
-  /* creation of VideoTask */
-  VideoTaskHandle = osThreadNew(videoTaskFunc, NULL, &VideoTask_attributes);
+	/* creation of VideoTask */
+	VideoTaskHandle = osThreadNew(videoTaskFunc, NULL, &VideoTask_attributes);
 
-  /* creation of TouchGFXTask */
-  TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL, &TouchGFXTask_attributes);
+	/* creation of TouchGFXTask */
+	TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL,
+			&TouchGFXTask_attributes);
 
-  /* USER CODE BEGIN RTOS_THREADS */
+	/* creation of Aquisition_task */
+	Aquisition_taskHandle = osThreadNew(StartAquisition, NULL,
+			&Aquisition_task_attributes);
+
+	/* USER CODE BEGIN RTOS_THREADS */
 	/* add threads, ... */
-  /* USER CODE END RTOS_THREADS */
+	/* USER CODE END RTOS_THREADS */
 
-  /* USER CODE BEGIN RTOS_EVENTS */
+	/* USER CODE BEGIN RTOS_EVENTS */
 	/* add events, ... */
-  /* USER CODE END RTOS_EVENTS */
+	/* USER CODE END RTOS_EVENTS */
 
 }
 
@@ -171,13 +173,10 @@ void MX_FREERTOS_Init(void) {
  * @retval None
  */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
-{
-  /* init code for USB_HOST */
-  MX_USB_HOST_Init();
-  /* USER CODE BEGIN StartDefaultTask */
-
-  vTaskDelay(pdMS_TO_TICKS(1000));
+void StartDefaultTask(void *argument) {
+	/* init code for USB_HOST */
+	MX_USB_HOST_Init();
+	/* USER CODE BEGIN StartDefaultTask */
 
 	extern QueueHandle_t pin1;
 	extern QueueHandle_t pin3;
@@ -266,25 +265,93 @@ void StartDefaultTask(void *argument)
 			TCA9535_WritePin(&hi2c4, TCA9535_PORT1, 7, pin16_state);
 		}
 
-		uint16_t SPI_RX;
-		uint8_t dummy = 0x80;
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
-		//vTaskDelay(pdMS_TO_TICKS(10));
-		HAL_SPI_Receive(&hspi2, &SPI_RX, 1, 200);
-		//HAL_SPI_TransmitReceive(&hspi2, &dummy, &SPI_RX, 1, 100);
-		//vTaskDelay(pdMS_TO_TICKS(5));
-		while(HAL_SPI_GetState(&hspi2) == HAL_BUSY);
-
-
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
-		uint16_t current_raw = (SPI_RX >> 3) & 0x1FFF;
-		int16_t signed_value = current_raw - 4096;
-
-
 		vTaskDelay(pdMS_TO_TICKS(100));
 
 	}
-  /* USER CODE END StartDefaultTask */
+	/* USER CODE END StartDefaultTask */
+}
+
+/* USER CODE BEGIN Header_StartAquisition */
+/**
+ * @brief Function implementing the Aquisition_task thread.
+ * @param argument: Not used
+ * @retval None
+ */
+/* USER CODE END Header_StartAquisition */
+void StartAquisition(void *argument) {
+	/* USER CODE BEGIN StartAquisition */
+	extern ADC_HandleTypeDef hadc1;
+	extern QueueHandle_t Sensor_Queue;
+
+	struct sensor {
+		float voltage;
+		float current;
+	};
+
+	struct sensor sensor_values;
+	int adc_digital = 0;
+
+	uint8_t index = 0;
+
+	uint8_t N_samples = 15;
+
+	int digital_voltage_array[N_samples];
+	float current_array[N_samples];
+	float result = 0;
+	;
+	/* Infinite loop */
+	for (;;) {
+
+		HAL_ADC_Start(&hadc1);
+
+		while (!__HAL_ADC_GET_FLAG(&hadc1, ADC_FLAG_EOC)) {
+			osDelay(1);
+		}
+
+		adc_digital = HAL_ADC_GetValue(&hadc1);
+
+		uint16_t SPI_RX;
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+		vTaskDelay(pdMS_TO_TICKS(1));
+		HAL_SPI_Receive(&hspi2, (uint16_t*) &SPI_RX, 1, 2000);
+		while (HAL_SPI_GetState(&hspi2) == HAL_SPI_STATE_BUSY)
+			;
+		vTaskDelay(pdMS_TO_TICKS(1));
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+		uint8_t temp = SPI_RX >> 15;
+		if (temp == 1) {
+			int16_t current_value = SPI_RX & 0x1FFF;
+			current_value -= 2045;
+			result = current_value * 0.0111 *2/*+ 0.336*/;
+			if(result > 50){
+				result = 0;
+			}
+		}
+
+		digital_voltage_array[index] = adc_digital;
+		current_array[index] = result;
+
+		index++;
+		if (index > N_samples) {
+			index = 0;
+		}
+		sensor_values.voltage = 0;
+		sensor_values.current = 0;
+		for (int i = 0; i < N_samples; i++) {
+			sensor_values.voltage += digital_voltage_array[i];
+			sensor_values.current += current_array[i];
+		}
+
+
+		sensor_values.voltage = (sensor_values.voltage * 3.3 / 65536)
+				/ N_samples;
+		sensor_values.current = (sensor_values.current) / N_samples;
+
+		xQueueOverwrite(Sensor_Queue, &sensor_values);
+
+		osDelay(10);
+	}
+	/* USER CODE END StartAquisition */
 }
 
 /* Private application code --------------------------------------------------*/

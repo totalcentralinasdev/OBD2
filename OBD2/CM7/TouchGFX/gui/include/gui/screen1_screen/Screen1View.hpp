@@ -23,6 +23,7 @@ public:
 	virtual void PIN14_exe();
 	virtual void PIN15_exe();
 	virtual void PIN16_exe();
+	virtual void update_values_exe();
 protected:
 };
 

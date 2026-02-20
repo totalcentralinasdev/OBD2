@@ -6,6 +6,21 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_XJH1" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0A            </Translation>
+      </Text>
+      <Text Id="__SingleUse_0GIO" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0V         </Translation>
+      </Text>
+      <Text Id="__SingleUse_3J2B" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Current: &lt;value&gt;</Translation>
+      </Text>
+      <Text Id="ResourceId1" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_XSKD" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Voltage: &lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_WLGX" Alignment="Center" TypographyId="Default">
         <Translation Language="GB">&#10;15&#10;&#10;</Translation>
       </Text>
@@ -57,7 +72,7 @@
     </TextGroup>
   </Texts>
   <Typographies>
-    <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacters="0-9,a-_" WildcardCharacterRanges="0-9,a-z,--_" />
     <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
   </Typographies>
