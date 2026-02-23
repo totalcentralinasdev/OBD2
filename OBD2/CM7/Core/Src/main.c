@@ -94,6 +94,7 @@ struct sensor{
 
 struct sensor dummy_sensor;
 
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -218,6 +219,8 @@ int main(void)
 
  // MX_IWDG1_Init(); // quando gera codigo comentar init de cima
  // HAL_IWDG_Refresh(&hiwdg1);
+
+
   /* USER CODE END 2 */
 
   /* Init scheduler */
