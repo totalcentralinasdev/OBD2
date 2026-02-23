@@ -42,7 +42,7 @@ uint8_t RxData[16];
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+volatile uint8_t g_CurrentTaskName;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -60,24 +60,37 @@ uint8_t RxData[16];
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
-const osThreadAttr_t defaultTask_attributes = { .name = "defaultTask",
-		.stack_size = 512 * 4, .priority = (osPriority_t) osPriorityNormal, };
+const osThreadAttr_t defaultTask_attributes = {
+  .name = "defaultTask",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 /* Definitions for VideoTask */
 osThreadId_t VideoTaskHandle;
-const osThreadAttr_t VideoTask_attributes = { .name = "VideoTask", .stack_size =
-		4096 * 4, .priority = (osPriority_t) osPriorityLow, };
+const osThreadAttr_t VideoTask_attributes = {
+  .name = "VideoTask",
+  .stack_size = 4096 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 /* Definitions for TouchGFXTask */
 osThreadId_t TouchGFXTaskHandle;
-const osThreadAttr_t TouchGFXTask_attributes = { .name = "TouchGFXTask",
-		.stack_size = 8192 * 4, .priority = (osPriority_t) osPriorityLow, };
+const osThreadAttr_t TouchGFXTask_attributes = {
+  .name = "TouchGFXTask",
+  .stack_size = 8192 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 /* Definitions for Aquisition_task */
 osThreadId_t Aquisition_taskHandle;
-const osThreadAttr_t Aquisition_task_attributes = { .name = "Aquisition_task",
-		.stack_size = 1024 * 4, .priority = (osPriority_t) osPriorityLow, };
+const osThreadAttr_t Aquisition_task_attributes = {
+  .name = "Aquisition_task",
+  .stack_size = 1024 * 4,
+  .priority = (osPriority_t) osPriorityAboveNormal,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-
+float hallcurrent_read_current(uint16_t current_value);
+uint8_t hallcurrent_check_status(uint16_t value);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -103,6 +116,8 @@ void vApplicationIdleHook(void) {
 	 important that vApplicationIdleHook() is permitted to return to its calling
 	 function, because it is the responsibility of the idle task to clean up
 	 memory allocated by the kernel to any task that has since been deleted. */
+
+	g_CurrentTaskName = 0;
 }
 /* USER CODE END 2 */
 
@@ -115,54 +130,51 @@ void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName) {
 /* USER CODE END 4 */
 
 /**
- * @brief  FreeRTOS initialization
- * @param  None
- * @retval None
- */
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
+  */
 void MX_FREERTOS_Init(void) {
-	/* USER CODE BEGIN Init */
+  /* USER CODE BEGIN Init */
 
-	/* USER CODE END Init */
+  /* USER CODE END Init */
 
-	/* USER CODE BEGIN RTOS_MUTEX */
+  /* USER CODE BEGIN RTOS_MUTEX */
 	/* add mutexes, ... */
-	/* USER CODE END RTOS_MUTEX */
+  /* USER CODE END RTOS_MUTEX */
 
-	/* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
 	/* add semaphores, ... */
-	/* USER CODE END RTOS_SEMAPHORES */
+  /* USER CODE END RTOS_SEMAPHORES */
 
-	/* USER CODE BEGIN RTOS_TIMERS */
+  /* USER CODE BEGIN RTOS_TIMERS */
 	/* start timers, add new ones, ... */
-	/* USER CODE END RTOS_TIMERS */
+  /* USER CODE END RTOS_TIMERS */
 
-	/* USER CODE BEGIN RTOS_QUEUES */
+  /* USER CODE BEGIN RTOS_QUEUES */
 	/* add queues, ... */
-	/* USER CODE END RTOS_QUEUES */
+  /* USER CODE END RTOS_QUEUES */
 
-	/* Create the thread(s) */
-	/* creation of defaultTask */
-	defaultTaskHandle = osThreadNew(StartDefaultTask, NULL,
-			&defaultTask_attributes);
+  /* Create the thread(s) */
+  /* creation of defaultTask */
+  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-	/* creation of VideoTask */
-	VideoTaskHandle = osThreadNew(videoTaskFunc, NULL, &VideoTask_attributes);
+  /* creation of VideoTask */
+  VideoTaskHandle = osThreadNew(videoTaskFunc, NULL, &VideoTask_attributes);
 
-	/* creation of TouchGFXTask */
-	TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL,
-			&TouchGFXTask_attributes);
+  /* creation of TouchGFXTask */
+  TouchGFXTaskHandle = osThreadNew(TouchGFX_Task, NULL, &TouchGFXTask_attributes);
 
-	/* creation of Aquisition_task */
-	Aquisition_taskHandle = osThreadNew(StartAquisition, NULL,
-			&Aquisition_task_attributes);
+  /* creation of Aquisition_task */
+  Aquisition_taskHandle = osThreadNew(StartAquisition, NULL, &Aquisition_task_attributes);
 
-	/* USER CODE BEGIN RTOS_THREADS */
+  /* USER CODE BEGIN RTOS_THREADS */
 	/* add threads, ... */
-	/* USER CODE END RTOS_THREADS */
+  /* USER CODE END RTOS_THREADS */
 
-	/* USER CODE BEGIN RTOS_EVENTS */
+  /* USER CODE BEGIN RTOS_EVENTS */
 	/* add events, ... */
-	/* USER CODE END RTOS_EVENTS */
+  /* USER CODE END RTOS_EVENTS */
 
 }
 
@@ -173,10 +185,11 @@ void MX_FREERTOS_Init(void) {
  * @retval None
  */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument) {
-	/* init code for USB_HOST */
-	MX_USB_HOST_Init();
-	/* USER CODE BEGIN StartDefaultTask */
+void StartDefaultTask(void *argument)
+{
+  /* init code for USB_HOST */
+  MX_USB_HOST_Init();
+  /* USER CODE BEGIN StartDefaultTask */
 
 	extern QueueHandle_t pin1;
 	extern QueueHandle_t pin3;
@@ -226,6 +239,7 @@ void StartDefaultTask(void *argument) {
 	TCA9535_Init(&hi2c4, config0, config1, output_port0, output_port1);
 
 	for (;;) {
+		g_CurrentTaskName = 1;
 		//HAL_IWDG_Refresh(&hiwdg1);
 		if (xQueuePeek(pin1, &pin1_state, 0) == pdPASS) {
 			TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 0, pin1_state);
@@ -268,7 +282,7 @@ void StartDefaultTask(void *argument) {
 		vTaskDelay(pdMS_TO_TICKS(100));
 
 	}
-	/* USER CODE END StartDefaultTask */
+  /* USER CODE END StartDefaultTask */
 }
 
 /* USER CODE BEGIN Header_StartAquisition */
@@ -278,8 +292,9 @@ void StartDefaultTask(void *argument) {
  * @retval None
  */
 /* USER CODE END Header_StartAquisition */
-void StartAquisition(void *argument) {
-	/* USER CODE BEGIN StartAquisition */
+void StartAquisition(void *argument)
+{
+  /* USER CODE BEGIN StartAquisition */
 	extern ADC_HandleTypeDef hadc1;
 	extern QueueHandle_t Sensor_Queue;
 
@@ -291,9 +306,9 @@ void StartAquisition(void *argument) {
 	struct sensor sensor_values;
 	int adc_digital = 0;
 
-	uint8_t index = 0;
+	uint8_t voltage_index = 0, current_index = 0;
 
-	uint8_t N_samples = 15;
+	uint8_t N_samples = 30;
 
 	int digital_voltage_array[N_samples];
 	float current_array[N_samples];
@@ -301,39 +316,35 @@ void StartAquisition(void *argument) {
 	;
 	/* Infinite loop */
 	for (;;) {
-
+		g_CurrentTaskName = 2;
 		HAL_ADC_Start(&hadc1);
 
 		while (!__HAL_ADC_GET_FLAG(&hadc1, ADC_FLAG_EOC)) {
-			osDelay(1);
+			//osDelay(1);
 		}
 
 		adc_digital = HAL_ADC_GetValue(&hadc1);
 
 		uint16_t SPI_RX;
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
-		vTaskDelay(pdMS_TO_TICKS(1));
-		HAL_SPI_Receive(&hspi2, (uint16_t*) &SPI_RX, 1, 2000);
+		HAL_SPI_Receive(&hspi2, (uint16_t*) &SPI_RX, 1, 5);
 		while (HAL_SPI_GetState(&hspi2) == HAL_SPI_STATE_BUSY)
 			;
-		vTaskDelay(pdMS_TO_TICKS(1));
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
-		uint8_t temp = SPI_RX >> 15;
-		if (temp == 1) {
-			int16_t current_value = SPI_RX & 0x1FFF;
-			current_value -= 2045;
-			result = current_value * 0.0111 *2/*+ 0.336*/;
-			if(result > 50){
-				result = 0;
-			}
+
+		result = hallcurrent_read_current(SPI_RX);
+		digital_voltage_array[voltage_index] = adc_digital;
+		if (result != -80) {
+			current_array[current_index] = result;
+			current_index++;
 		}
 
-		digital_voltage_array[index] = adc_digital;
-		current_array[index] = result;
-
-		index++;
-		if (index > N_samples) {
-			index = 0;
+		voltage_index++;
+		if (voltage_index > N_samples) {
+			voltage_index = 0;
+		}
+		if (current_index > N_samples) {
+			current_index = 0;
 		}
 		sensor_values.voltage = 0;
 		sensor_values.current = 0;
@@ -342,20 +353,49 @@ void StartAquisition(void *argument) {
 			sensor_values.current += current_array[i];
 		}
 
-
 		sensor_values.voltage = (sensor_values.voltage * 3.3 / 65536)
 				/ N_samples;
 		sensor_values.current = (sensor_values.current) / N_samples;
 
 		xQueueOverwrite(Sensor_Queue, &sensor_values);
 
-		osDelay(10);
+		vTaskDelay(pdMS_TO_TICKS(5));
 	}
-	/* USER CODE END StartAquisition */
+  /* USER CODE END StartAquisition */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+
+uint8_t hallcurrent_check_status(uint16_t value) {
+	if ((value >> 15) == 0) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
+float hallcurrent_read_current(uint16_t current_value) {
+	float result = 0;
+	//uint16_t current_value = 0;
+
+	if (!hallcurrent_check_status(current_value)) {
+		current_value &= 0x1FFF;
+
+		//current_value -= 4096;
+		current_value -= 4095;
+
+		result = (float) current_value;
+		result *= 0.0125;
+	} else {
+		return -80;
+	}
+
+	if (result > 50) {
+		result = 0.0;
+	}
+	return result;
+}
 
 /* USER CODE END Application */
 
