@@ -279,6 +279,11 @@ void StartDefaultTask(void *argument)
 			TCA9535_WritePin(&hi2c4, TCA9535_PORT1, 7, pin16_state);
 		}
 
+		TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 1, 0);
+		TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 3, 0);
+		TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 4, 0);
+		TCA9535_WritePin(&hi2c4, TCA9535_PORT1, 1, 0);
+
 		vTaskDelay(pdMS_TO_TICKS(100));
 
 	}

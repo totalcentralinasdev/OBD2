@@ -9,6 +9,7 @@
 #define APPLICATION_USER_TCA9535_TCA9535_H_
 
 #include "stm32h7xx.h"
+#include "i2c.h"
 
 typedef struct {
     I2C_HandleTypeDef *hi2c;
@@ -41,6 +42,11 @@ void TCA9535_WritePin(I2C_HandleTypeDef *hi2c, uint8_t port, uint8_t pin, GPIO_P
 
 uint8_t TCA9535_ReadPin(I2C_HandleTypeDef *hi2c, uint8_t port, uint8_t pin);
 
+void I2C_GPIO_AFMode(void);
+
+void I2C_GPIO_ManualMode(void);
+
+void I2C_RECOVERY(I2C_HandleTypeDef *hi2c);
 
 
 #endif /* APPLICATION_USER_TCA9535_TCA9535_H_ */
