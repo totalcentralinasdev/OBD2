@@ -158,7 +158,6 @@ void Screen1View::update_values_exe(){
 	struct sensor SensorValues;
 
 	if(xQueueReceive(Sensor_Queue, &SensorValues, pdMS_TO_TICKS(10)) == pdPASS){
-		SensorValues.voltage = 10.856;
 		Unicode::snprintfFloat(Voltage_textBuffer, VOLTAGE_TEXT_SIZE, "%.2f V",SensorValues.voltage);
 		Unicode::snprintfFloat(Current_textBuffer, CURRENT_TEXT_SIZE, "%.2f A",SensorValues.current);
 		Voltage_text.invalidate();

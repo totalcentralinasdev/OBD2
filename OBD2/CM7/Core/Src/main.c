@@ -169,12 +169,18 @@ int main(void)
   Sensor_Queue = xQueueCreate(1,sizeof(dummy_sensor));
 
 
+  /**
+   * TODO: To correct flickering problem, MX_FMC_Init() must be placed bellow MX_LTDC_Init()
+   */
+
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_MDMA_Init();
   MX_LTDC_Init();
+  MX_FMC_Init();
   MX_USART1_UART_Init();
   MX_I2C4_Init();
   MX_DAC1_Init();
@@ -192,7 +198,7 @@ int main(void)
   MX_TIM15_Init();
   MX_DSIHOST_DSI_Init();
   MX_RNG_Init();
-  MX_FMC_Init();
+  //MX_FMC_Init();
   MX_JPEG_Init();
   MX_RTC_Init();
   MX_ADC1_Init();

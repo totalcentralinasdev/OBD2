@@ -313,7 +313,7 @@ void StartAquisition(void *argument)
 
 	uint8_t voltage_index = 0, current_index = 0;
 
-	uint8_t N_samples = 30;
+	uint8_t N_samples = 45;
 
 	int digital_voltage_array[N_samples];
 	float current_array[N_samples];
@@ -332,9 +332,11 @@ void StartAquisition(void *argument)
 
 		uint16_t SPI_RX;
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+		//vTaskDelay(pdMS_TO_TICKS(1));
 		HAL_SPI_Receive(&hspi2, (uint16_t*) &SPI_RX, 1, 5);
 		while (HAL_SPI_GetState(&hspi2) == HAL_SPI_STATE_BUSY)
 			;
+		//vTaskDelay(pdMS_TO_TICKS(1));
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
 
 		result = hallcurrent_read_current(SPI_RX);
