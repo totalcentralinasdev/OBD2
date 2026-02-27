@@ -19,7 +19,12 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y cppcheck wkhtmltopdf
+        sudo apt install -y cppcheck wkhtmltopdf enscript ghostscript
+
+    - name: Verify files exist
+      run: |
+        ls -R CM7/Core/Src
+        ls -R CM7/TouchGFX/gui/src
 
     - name: Run cppcheck
       run: |
@@ -29,19 +34,19 @@ jobs:
         CM7/TouchGFX/gui/src \
         --xml --xml-version=2 2> cppcheck-report.xml
 
-    - name: Generate HTML report
+    - name: Generate simple text report
       run: |
-        cppcheck-htmlreport \
-        --file=cppcheck-report.xml \
-        --report-dir=cppcheck-html \
-        --source-dir=.
+        cppcheck --enable=all --inconclusive --std=c11 \
+        CM7/Core/Src/main.c \
+        CM7/Core/Src/freertos.c \
+        CM7/TouchGFX/gui/src > report.txt
 
     - name: Create report folder
       run: mkdir -p report
 
-    - name: Convert HTML to PDF
+    - name: Convert text report to PDF
       run: |
-        wkhtmltopdf cppcheck-html/index.html report/cppcheck-report.pdf
+        enscript report.txt -o - | ps2pdf - report/cppcheck-report.pdf
 
     - name: Upload PDF Artifact
       uses: actions/upload-artifact@v4
