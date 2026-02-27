@@ -19,37 +19,30 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y cppcheck wkhtmltopdf python3 wget
+        # Install cppcheck and htmlreport support with pygments
+        sudo apt install -y cppcheck cppcheck-htmlreport python3-pygments wkhtmltopdf
 
     - name: Verify files exist
       run: |
-        echo "Checking Core/Src files:"
+        echo "Checking files:"
         ls -R OBD2/CM7/Core/Src
-        echo "Checking TouchGFX/gui/src files:"
-        ls -R OBD2/CM7/TouchGFX/gui/src
 
-    - name: Run cppcheck and generate XML report
+    - name: Run cppcheck and generate XML
       run: |
         cppcheck --enable=all --inconclusive --std=c11 \
           OBD2/CM7/Core/Src/*.c \
           OBD2/CM7/TouchGFX/gui/src/*.cpp \
           --xml --xml-version=2 2> cppcheck-report.xml
 
-    - name: Download cppcheck-htmlreport script
-      run: |
-        wget https://raw.githubusercontent.com/danmar/cppcheck/master/cppcheck-htmlreport.py -O cppcheck-htmlreport.py
-        chmod +x cppcheck-htmlreport.py
-
-    - name: Generate HTML report from XML
+    - name: Generate HTML report
       run: |
         mkdir -p report-html
-        python3 cppcheck-htmlreport.py \
+        cppcheck-htmlreport \
           --file=cppcheck-report.xml \
           --report-dir=report-html \
-          --source-dir=OBD2 \
-          --title="STM32 Code Analysis Report"
+          --source-dir=OBD2
 
-    - name: Convert HTML report to PDF
+    - name: Convert HTML to PDF
       run: |
         mkdir -p report
         wkhtmltopdf report-html/index.html report/cppcheck-report.pdf
