@@ -24,7 +24,6 @@ jobs:
     - name: Run cppcheck
       run: |
         cppcheck --enable=all --inconclusive --std=c11 \
-        -I CM7/Core/Inc \
         CM7/Core/Src/main.c \
         CM7/Core/Src/freertos.c \
         CM7/TouchGFX/gui/src \
