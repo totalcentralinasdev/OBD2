@@ -19,34 +19,34 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y cppcheck wkhtmltopdf enscript ghostscript
+        sudo apt install -y cppcheck wkhtmltopdf python3 python3-pip
+        pip3 install cppcheck-htmlreport
 
     - name: Verify files exist
       run: |
+        echo "Checking Core/Src files:"
         ls -R OBD2/CM7/Core/Src
+        echo "Checking TouchGFX/gui/src files:"
         ls -R OBD2/CM7/TouchGFX/gui/src
 
-    - name: Run cppcheck
+    - name: Run cppcheck and generate XML report
       run: |
         cppcheck --enable=all --inconclusive --std=c11 \
-        OBD2/CM7/Core/Src/main.c \
-        OBD2/CM7/Core/Src/freertos.c \
-        OBD2/CM7/TouchGFX/gui/src \
-        --xml --xml-version=2 2> cppcheck-report.xml
+          OBD2/CM7/Core/Src/*.c \
+          OBD2/CM7/TouchGFX/gui/src/*.cpp \
+          --xml --xml-version=2 2> cppcheck-report.xml
 
-    - name: Generate simple text report
+    - name: Generate HTML report from XML
       run: |
-        cppcheck --enable=all --inconclusive --std=c11 \
-        OBD2/CM7/Core/Src/main.c \
-        OBD2/CM7/Core/Src/freertos.c \
-        OBD2/CM7/TouchGFX/gui/src > report.txt
+        cppcheck-htmlreport --file=cppcheck-report.xml \
+          --report-dir=report-html \
+          --source-dir=OBD2 \
+          --title="STM32 Code Analysis Report"
 
-    - name: Create report folder
-      run: mkdir -p report
-
-    - name: Convert text report to PDF
+    - name: Convert HTML report to PDF
       run: |
-        enscript report.txt -o - | ps2pdf - report/cppcheck-report.pdf
+        mkdir -p report
+        wkhtmltopdf report-html/index.html report/cppcheck-report.pdf
 
     - name: Upload PDF Artifact
       uses: actions/upload-artifact@v4
