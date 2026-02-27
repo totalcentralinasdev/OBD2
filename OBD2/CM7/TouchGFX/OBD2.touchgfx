@@ -342,7 +342,8 @@
               "Green": 255,
               "Blue": 255
             },
-            "BorderSize": 5
+            "BorderSize": 5,
+            "Clickable": true
           },
           {
             "Type": "TextArea",
@@ -375,6 +376,31 @@
               "UseBuffer": true,
               "BufferSize": 100
             }
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "Resistor_box",
+            "X": 591,
+            "Y": 219,
+            "Width": 69,
+            "Height": 124,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 5
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "Resistor_icon",
+            "X": 587,
+            "Y": 229,
+            "Width": 73,
+            "Height": 104,
+            "Filename": "resistor.png",
+            "ScalingAlgorithm": "Nearest-neighbor",
+            "Clickable": true
           }
         ],
         "Interactions": [
@@ -519,6 +545,217 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "update_values_exe"
+            }
+          },
+          {
+            "InteractionName": "plot_change",
+            "Trigger": {
+              "Type": "TriggerWhen",
+              "ActionCustomTypeName": "Call Screen1 plot_graphs"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "plot"
+            }
+          }
+        ],
+        "CustomActions": [
+          {
+            "Name": "plot_graphs"
+          }
+        ]
+      },
+      {
+        "Name": "plot",
+        "CanvasBufferSize": 15360,
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "image1",
+            "Width": 1024,
+            "Height": 600,
+            "RelativeFilename": "__generated\\alternate_theme_images_backgrounds_1024x600_gradient_light.png"
+          },
+          {
+            "Type": "ButtonWithIcon",
+            "Name": "return_btn",
+            "X": 14,
+            "Y": 557,
+            "Width": 36,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_icon_rounded_micro_fill_normal.png",
+            "IconPressed": "__generated\\icon_theme_images_hardware_keyboard_arrow_left_50_50_E8F6FB.svg.png",
+            "IconReleased": "__generated\\icon_theme_images_hardware_keyboard_arrow_left_50_50_E8F6FB.svg.png",
+            "IconX": -7,
+            "IconY": -7,
+            "IconHeight": 50,
+            "IconWidth": 50,
+            "Preset": "alternate_theme\\presets\\button\\icon\\rounded\\micro_fill_normal.json"
+          },
+          {
+            "Type": "Box",
+            "Name": "box1",
+            "Width": 1024,
+            "Height": 550,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "DynamicGraph",
+            "Name": "dynamicGraph_Voltage",
+            "Width": 1024,
+            "Height": 275,
+            "DataSeed": -403060465,
+            "NumberOfValues": 100,
+            "MaxY": 15.0,
+            "Precision": "0.0001",
+            "LastIndex": 99,
+            "XAxisScale": 1.0,
+            "LabelSizeLeft": 30,
+            "LabelSizeRight": 1,
+            "PaddingTop": 10,
+            "PaddingBottom": 10,
+            "PaddingRight": 10,
+            "GraphType": "GraphWrapOverwrite",
+            "GraphDrawers": [
+              {
+                "Type": "LineDrawer",
+                "LineWidth": 2,
+                "FileNameImage": "",
+                "Color": {
+                  "Red": 20,
+                  "Green": 151,
+                  "Blue": 197
+                }
+              }
+            ],
+            "XAxisGrid": {
+              "Type": "GraphGrid",
+              "Color": {
+                "Red": 20,
+                "Green": 151,
+                "Blue": 197
+              },
+              "Interval": 10.0,
+              "LineWidth": 1
+            },
+            "YAxisGrid": {
+              "Type": "GraphGrid",
+              "Color": {
+                "Red": 20,
+                "Green": 151,
+                "Blue": 197
+              },
+              "Interval": 2.0,
+              "LineWidth": 1
+            },
+            "YAxisLabel": {
+              "Type": "GraphLabel",
+              "Interval": 1.0,
+              "DecimalSeparator": "Point",
+              "TextColor": {
+                "Red": 20,
+                "Green": 151,
+                "Blue": 197
+              },
+              "TextId": "__SingleUse_3KKJ",
+              "TextRotation": "0",
+              "Position": "Left"
+            },
+            "Clickable": true
+          },
+          {
+            "Type": "DynamicGraph",
+            "Name": "dynamicGraph_Current",
+            "Y": 275,
+            "Width": 1024,
+            "Height": 275,
+            "DataSeed": -403060465,
+            "NumberOfValues": 100,
+            "MaxY": 5.0,
+            "Precision": "0.01",
+            "LastIndex": 99,
+            "XAxisScale": 1.0,
+            "LabelSizeLeft": 30,
+            "PaddingTop": 15,
+            "PaddingBottom": 10,
+            "PaddingRight": 10,
+            "GraphType": "GraphWrapOverwrite",
+            "GraphDrawers": [
+              {
+                "Type": "LineDrawer",
+                "LineWidth": 2,
+                "FileNameImage": "",
+                "Color": {
+                  "Red": 20,
+                  "Green": 151,
+                  "Blue": 197
+                }
+              }
+            ],
+            "XAxisGrid": {
+              "Type": "GraphGrid",
+              "Color": {
+                "Red": 20,
+                "Green": 151,
+                "Blue": 197
+              },
+              "Interval": 10.0,
+              "LineWidth": 2
+            },
+            "YAxisGrid": {
+              "Type": "GraphGrid",
+              "Color": {
+                "Red": 20,
+                "Green": 151,
+                "Blue": 197
+              },
+              "Interval": 1.0,
+              "LineWidth": 1
+            },
+            "YAxisLabel": {
+              "Type": "GraphLabel",
+              "Interval": 1.0,
+              "DecimalSeparator": "Point",
+              "TextColor": {
+                "Red": 20,
+                "Green": 151,
+                "Blue": 197
+              },
+              "TextId": "__SingleUse_CLY9",
+              "TextRotation": "0",
+              "Position": "Left"
+            },
+            "Clickable": true
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "return_interaction",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "return_btn"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Screen1"
+            }
+          },
+          {
+            "InteractionName": "plot_update",
+            "Trigger": {
+              "Type": "TriggerOnEveryTick",
+              "TickCount": 1
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "plot_update_exe"
             }
           }
         ]

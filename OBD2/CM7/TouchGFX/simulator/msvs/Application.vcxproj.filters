@@ -184,6 +184,18 @@
     <Filter Include="Header Files\generated\simulator\include\simulator\video">
       <UniqueIdentifier>DF532889-015F-8569-2040-AF059DA7FF87</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\plot_screen">
+      <UniqueIdentifier>58CD5291-BFCF-D6AF-D7A6-BDAECEB53EE3</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\plot_screen">
+      <UniqueIdentifier>93A08540-93DD-C266-D3B3-B91F8008FB2F</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\plot_screen">
+      <UniqueIdentifier>4433F005-E961-5F31-6ADB-2D26FD71D455</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\plot_screen">
+      <UniqueIdentifier>E03CAA48-2817-5747-052D-EE777ADD7D6F</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -224,6 +236,15 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\simulator\src\video\SoftwareMJPEGDecoder.cpp">
       <Filter>Source Files\generated\simulator\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\plot_screen\plotPresenter.cpp">
+      <Filter>Source Files\gui\plot_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\plot_screen\plotView.cpp">
+      <Filter>Source Files\gui\plot_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\plot_screen\plotViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\plot_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -675,6 +696,15 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.hpp">
       <Filter>Header Files\generated\simulator\include\simulator\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\plot_screen\plotPresenter.hpp">
+      <Filter>Header Files\gui\plot_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\plot_screen\plotView.hpp">
+      <Filter>Header Files\gui\plot_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\plot_screen\plotViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\plot_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

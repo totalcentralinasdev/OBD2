@@ -84,7 +84,10 @@ QueueHandle_t pin14;
 QueueHandle_t pin15;
 QueueHandle_t pin16;
 
+QueueHandle_t Termination_Resistor;
+
 QueueHandle_t Sensor_Queue;
+QueueHandle_t Sampling_size;
 
 
 struct sensor{
@@ -166,8 +169,9 @@ int main(void)
   pin14 = xQueueCreate(1,sizeof(uint8_t));
   pin15 = xQueueCreate(1,sizeof(uint8_t));
   pin16 = xQueueCreate(1,sizeof(uint8_t));
+  Termination_Resistor = xQueueCreate(1,sizeof(uint8_t));
   Sensor_Queue = xQueueCreate(1,sizeof(dummy_sensor));
-
+  Sampling_size = xQueueCreate(1,sizeof(uint8_t));
 
   /**
    * TODO: To correct flickering problem, MX_FMC_Init() must be placed bellow MX_LTDC_Init()
@@ -180,7 +184,7 @@ int main(void)
   MX_GPIO_Init();
   MX_MDMA_Init();
   MX_LTDC_Init();
-  MX_FMC_Init();
+//  MX_FMC_Init();
   MX_USART1_UART_Init();
   MX_I2C4_Init();
   MX_DAC1_Init();
@@ -198,7 +202,7 @@ int main(void)
   MX_TIM15_Init();
   MX_DSIHOST_DSI_Init();
   MX_RNG_Init();
-  //MX_FMC_Init();
+  MX_FMC_Init();
   MX_JPEG_Init();
   MX_RTC_Init();
   MX_ADC1_Init();

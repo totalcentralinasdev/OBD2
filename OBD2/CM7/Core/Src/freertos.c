@@ -118,6 +118,7 @@ void vApplicationIdleHook(void) {
 	 memory allocated by the kernel to any task that has since been deleted. */
 
 	g_CurrentTaskName = 0;
+
 }
 /* USER CODE END 2 */
 
@@ -204,6 +205,8 @@ void StartDefaultTask(void *argument)
 	extern QueueHandle_t pin15;
 	extern QueueHandle_t pin16;
 
+	extern QueueHandle_t Termination_Resistor;
+
 	uint8_t pin1_state = 0;
 	uint8_t pin3_state = 0;
 	uint8_t pin6_state = 0;
@@ -217,6 +220,8 @@ void StartDefaultTask(void *argument)
 	uint8_t pin15_state = 0;
 	uint8_t pin16_state = 0;
 
+	uint8_t termination_resistor_state = 0;
+
 	xQueueOverwrite(pin1, &pin1_state);
 	xQueueOverwrite(pin3, &pin3_state);
 	xQueueOverwrite(pin6, &pin6_state);
@@ -229,6 +234,7 @@ void StartDefaultTask(void *argument)
 	xQueueOverwrite(pin14, &pin14_state);
 	xQueueOverwrite(pin15, &pin15_state);
 	xQueueOverwrite(pin16, &pin16_state);
+	xQueueOverwrite(Termination_Resistor, &termination_resistor_state);
 
 	uint8_t config0 = 0x00; // 0 out - 1 IN
 	uint8_t config1 = 0x00;
@@ -246,6 +252,9 @@ void StartDefaultTask(void *argument)
 		}
 		if (xQueuePeek(pin3, &pin3_state, 0) == pdPASS) {
 			TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 2, pin3_state);
+		}
+		if(xQueuePeek(Termination_Resistor, &termination_resistor_state, 0) == pdPASS){
+			TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 4, termination_resistor_state);
 		}
 		if (xQueuePeek(pin6, &pin6_state, 0) == pdPASS) {
 			TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 5, pin6_state);
@@ -281,7 +290,6 @@ void StartDefaultTask(void *argument)
 
 		TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 1, 0);
 		TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 3, 0);
-		TCA9535_WritePin(&hi2c4, TCA9535_PORT0, 4, 0);
 		TCA9535_WritePin(&hi2c4, TCA9535_PORT1, 1, 0);
 
 		vTaskDelay(pdMS_TO_TICKS(100));
@@ -302,6 +310,7 @@ void StartAquisition(void *argument)
   /* USER CODE BEGIN StartAquisition */
 	extern ADC_HandleTypeDef hadc1;
 	extern QueueHandle_t Sensor_Queue;
+	extern QueueHandle_t Sampling_size;
 
 	struct sensor {
 		float voltage;
@@ -313,7 +322,7 @@ void StartAquisition(void *argument)
 
 	uint8_t voltage_index = 0, current_index = 0;
 
-	uint8_t N_samples = 45;
+	uint8_t N_samples = 150;
 
 	int digital_voltage_array[N_samples];
 	float current_array[N_samples];
@@ -321,6 +330,7 @@ void StartAquisition(void *argument)
 	;
 	/* Infinite loop */
 	for (;;) {
+		xQueueReceive(Sampling_size, &N_samples, 0);
 		g_CurrentTaskName = 2;
 		HAL_ADC_Start(&hadc1);
 
@@ -362,6 +372,7 @@ void StartAquisition(void *argument)
 
 		sensor_values.voltage = (sensor_values.voltage * 3.3 / 65536)
 				/ N_samples;
+		sensor_values.voltage = sensor_values.voltage * 13 / 3;
 		sensor_values.current = (sensor_values.current) / N_samples;
 
 		xQueueOverwrite(Sensor_Queue, &sensor_values);

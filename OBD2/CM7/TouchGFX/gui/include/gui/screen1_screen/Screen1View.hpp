@@ -24,7 +24,13 @@ public:
 	virtual void PIN15_exe();
 	virtual void PIN16_exe();
 	virtual void update_values_exe();
+
+	void boxWithBorder1ClickHandler(const BoxWithBorder& b, const ClickEvent& e);
+	void Resistor_icon_ClickHandler(const ScalableImage& b, const ClickEvent& e);
+
 protected:
+	Callback<Screen1View, const BoxWithBorder&, const ClickEvent&> boxWithBorder1ClickedCallback;
+	Callback<Screen1View, const ScalableImage&, const ClickEvent&> Termination_Resistor_Callback;
 };
 
 #endif // SCREEN1VIEW_HPP

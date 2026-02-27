@@ -23,6 +23,9 @@ public:
     // Screen1
     void gotoScreen1ScreenNoTransition();
 
+    // plot
+    void gotoplotScreenNoTransition();
+
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
     FrontendHeap& frontendHeap;
@@ -30,6 +33,9 @@ protected:
 
     // Screen1
     void gotoScreen1ScreenNoTransitionImpl();
+
+    // plot
+    void gotoplotScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

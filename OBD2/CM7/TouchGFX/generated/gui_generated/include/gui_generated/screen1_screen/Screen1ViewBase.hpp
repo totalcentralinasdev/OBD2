@@ -14,6 +14,7 @@
 #include <touchgfx/widgets/ToggleButton.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/BoxWithBorder.hpp>
+#include <touchgfx/mixins/ClickListener.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
@@ -23,6 +24,11 @@ public:
     virtual ~Screen1ViewBase();
     virtual void setupScreen();
     virtual void handleTickEvent();
+
+    /*
+     * Custom Actions
+     */
+    virtual void plot_graphs();
 
     /*
      * Virtual Action Handlers
@@ -120,9 +126,11 @@ protected:
     touchgfx::TextArea textArea1_1_1;
     touchgfx::TextArea textArea1_2_6;
     touchgfx::TextArea textArea1_2_1_1;
-    touchgfx::BoxWithBorder boxWithBorder1;
+    touchgfx::ClickListener< touchgfx::BoxWithBorder > boxWithBorder1;
     touchgfx::TextAreaWithOneWildcard Voltage_text;
     touchgfx::TextAreaWithOneWildcard Current_text;
+    touchgfx::BoxWithBorder Resistor_box;
+    touchgfx::ClickListener< touchgfx::ScalableImage > Resistor_icon;
 
     /*
      * Wildcard Buffers
