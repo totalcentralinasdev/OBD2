@@ -216,14 +216,14 @@ Screen1ViewBase::Screen1ViewBase() :
     Current_text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3J2B));
     add(Current_text);
 
-    Resistor_box.setPosition(591, 219, 69, 124);
+    Resistor_box.setPosition(591, 222, 69, 124);
     Resistor_box.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     Resistor_box.setBorderColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     Resistor_box.setBorderSize(5);
     add(Resistor_box);
 
     Resistor_icon.setBitmap(touchgfx::Bitmap(BITMAP_RESISTOR_ID));
-    Resistor_icon.setPosition(587, 229, 73, 104);
+    Resistor_icon.setPosition(591, 232, 73, 104);
     Resistor_icon.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
     add(Resistor_icon);
 }

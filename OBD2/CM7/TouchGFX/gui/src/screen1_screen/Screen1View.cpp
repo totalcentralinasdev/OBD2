@@ -58,7 +58,7 @@ void Screen1View::Resistor_icon_ClickHandler(const ScalableImage &b,
 				}
 			}
 			Resistor_box.invalidate();
-			xQueueOverwrite(Termination_Resistor,&state);
+			xQueueOverwrite(Termination_Resistor, &state);
 		}
 	}
 }

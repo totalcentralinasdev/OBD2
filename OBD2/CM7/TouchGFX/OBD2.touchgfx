@@ -381,7 +381,7 @@
             "Type": "BoxWithBorder",
             "Name": "Resistor_box",
             "X": 591,
-            "Y": 219,
+            "Y": 222,
             "Width": 69,
             "Height": 124,
             "Color": {
@@ -394,8 +394,8 @@
           {
             "Type": "ScalableImage",
             "Name": "Resistor_icon",
-            "X": 587,
-            "Y": 229,
+            "X": 591,
+            "Y": 232,
             "Width": 73,
             "Height": 104,
             "Filename": "resistor.png",
