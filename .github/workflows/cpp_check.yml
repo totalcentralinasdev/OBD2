@@ -1,0 +1,52 @@
+name: STM32 Cppcheck PDF Report
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y cppcheck python3-pip wkhtmltopdf
+        pip3 install cppcheck-htmlreport
+
+    - name: Run cppcheck
+      run: |
+        cppcheck --enable=all --inconclusive --std=c11 \
+        -I CM7/Core/Inc \
+        CM7/Core/Src/main.c \
+        CM7/Core/Src/freertos.c \
+        CM7/TouchGFX/gui/src \
+        --xml --xml-version=2 2> cppcheck-report.xml
+
+    - name: Generate HTML report
+      run: |
+        cppcheck-htmlreport \
+        --file=cppcheck-report.xml \
+        --report-dir=cppcheck-html \
+        --source-dir=.
+
+    - name: Create report folder
+      run: mkdir -p report
+
+    - name: Convert HTML to PDF
+      run: |
+        wkhtmltopdf cppcheck-html/index.html report/cppcheck-report.pdf
+
+    - name: Upload PDF Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: cppcheck-pdf-report
+        path: report/cppcheck-report.pdf
