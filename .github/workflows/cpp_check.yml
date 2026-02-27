@@ -19,8 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y cppcheck python3-pip wkhtmltopdf
-        pip3 install cppcheck-htmlreport
+        sudo apt install -y cppcheck wkhtmltopdf
 
     - name: Run cppcheck
       run: |
