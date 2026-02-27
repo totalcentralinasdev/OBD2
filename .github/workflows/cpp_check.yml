@@ -1,51 +1,32 @@
-name: STM32 Cppcheck User-Friendly PDF Report
+name: STM32 Cppcheck PDF Report
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: Install dependencies
       run: |
         sudo apt update
-        # Install cppcheck and htmlreport support with pygments
-        sudo apt install -y cppcheck cppcheck-htmlreport python3-pygments wkhtmltopdf
+        sudo apt install -y cppcheck enscript ghostscript
 
-    - name: Verify files exist
-      run: |
-        echo "Checking files:"
-        ls -R OBD2/CM7/Core/Src
-
-    - name: Run cppcheck and generate XML
-      run: |
-        cppcheck --enable=all --inconclusive --std=c11 \
-          OBD2/CM7/Core/Src/*.c \
-          OBD2/CM7/TouchGFX/gui/src/*.cpp \
-          --xml --xml-version=2 2> cppcheck-report.xml
-
-    - name: Generate HTML report
-      run: |
-        mkdir -p report-html
-        cppcheck-htmlreport \
-          --file=cppcheck-report.xml \
-          --report-dir=report-html \
-          --source-dir=OBD2
-
-    - name: Convert HTML to PDF
+    - name: Run cppcheck and generate text report
       run: |
         mkdir -p report
-        wkhtmltopdf report-html/index.html report/cppcheck-report.pdf
+        cppcheck --enable=all --inconclusive --std=c11 \
+          OBD2/CM7/Core/Src/*.c \
+          OBD2/CM7/TouchGFX/gui/src/*.cpp 2>&1 | tee report/report.txt
+
+    - name: Convert text report to PDF
+      run: |
+        enscript -B -q --color --line-numbers report/report.txt -o - | ps2pdf - report/cppcheck-report.pdf
 
     - name: Upload PDF Artifact
       uses: actions/upload-artifact@v4
